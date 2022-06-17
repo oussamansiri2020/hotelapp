@@ -11,6 +11,8 @@
                 </li>
                 <li><a href="{{ url('/room_type') }}">Rooms</a>
                 </li>
+                <li><a href="{{ url('/spa_type') }}">Spa</a>
+                </li>
                 <li><a href="{{ url('/event') }}">Events</a>
                 </li>
                 {{-- <li><a href="{{ url('/food') }}">Food Menu</a>

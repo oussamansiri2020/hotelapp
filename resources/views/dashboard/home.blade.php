@@ -2,11 +2,11 @@
 
 @section('content')
     <div class="db-cent-2">
-        {{-- <div class="db-2-main-1">
+        <div class="db-2-main-1">
             <div class="db-2-main-2"> <img src="{{ asset("front/images/icon/dbc5.png") }}" alt=""> <span> Room Bookings</span>
                 <p></p>
                 <h2>{{ $total_room_bookings }}</h2> </div>
-        </div> --}}
+        </div>
         <div class="db-2-main-1">
             <div class="db-2-main-2"> <img src="{{ asset("front/images/icon/dbc6.png") }}" alt=""> <span> Event Bookings</span>
                 <p></p>

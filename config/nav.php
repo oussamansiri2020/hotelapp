@@ -18,7 +18,8 @@ return [
             'name' =>  'Booking',
             'actions' => [
                 'room_booking' => 'admin/room_booking',
-                'event_booking' =>  'admin/event_booking'
+                'event_booking' =>  'admin/event_booking',
+                'spa_booking' =>  'admin/spa_booking'
             ],
             'icon' => 'ti-control-forward'
         ],
@@ -29,10 +30,17 @@ return [
             ],
             'icon' => 'ti-ticket'
         ],
-        'food' => [
-            'name' => 'Food Menu',
+        // 'food' => [
+        //     'name' => 'Food Menu',
+        //     'actions' => [
+        //         'view' => 'admin/food',
+        //     ],
+        //     'icon' => 'ti-pencil-alt'
+        // ],
+        'spa' => [
+            'name' => 'Spa',
             'actions' => [
-                'view' => 'admin/food',
+                'view' => 'admin/spa_type',
             ],
             'icon' => 'ti-pencil-alt'
         ],
@@ -43,13 +51,13 @@ return [
             ],
             'icon' => 'ti-home'
         ],
-        'facility' => [
-            'name' => 'Facility',
-            'actions' => [
-                'view' => 'admin/facility',
-            ],
-            'icon' => 'ti-crown'
-        ],
+        // 'facility' => [
+        //     'name' => 'Facility',
+        //     'actions' => [
+        //         'view' => 'admin/facility',
+        //     ],
+        //     'icon' => 'ti-crown'
+        // ],
         'user' => [
             'name' => 'User',
             'actions' => [
@@ -64,20 +72,20 @@ return [
             ],
             'icon' => 'ti-layout-grid2'
         ],
-        'Review' => [
-            'name' => 'Review',
-            'actions' => [
-                'view' => 'admin/review',
-            ],
-            'icon' => 'ti-star'
-        ],
-        'Page' => [
-            'name' => 'Page',
-            'actions' => [
-                'view' => 'admin/page',
-            ],
-            'icon' => 'ti-star'
-        ],
+        // 'Review' => [
+        //     'name' => 'Review',
+        //     'actions' => [
+        //         'view' => 'admin/review',
+        //     ],
+        //     'icon' => 'ti-star'
+        // ],
+        // 'Page' => [
+        //     'name' => 'Page',
+        //     'actions' => [
+        //         'view' => 'admin/page',
+        //     ],
+        //     'icon' => 'ti-star'
+        // ],
     ],
 
 ];

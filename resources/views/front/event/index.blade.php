@@ -20,6 +20,7 @@
                             <h2>Upcoming Events</h2>
                             <p>All future events being hosted in our hotel</p>
                             @foreach($events as $event)
+                        
                             {!! Form::open(array('url' => 'event/'.$event->id.'/book', 'class' => 'col s12')) !!}
                             {{ Form::hidden('_method', 'POST') }}
                             @csrf
@@ -38,12 +39,13 @@
                                     <h3>{{ $event->name }}</h3> <span><strong>Date: </strong> {{ \Carbon\Carbon::parse($event->date)->toFormattedDateString() }}</span>
                                     <p><strong>Price: </strong> {{ $event->price }}</p>
                                     <p>{{ $event->description }}</p>
+                                    <p>{{ $event->id }}</p>
                                 </div>
                                 <div class="col-md-2"> <span style="font-weight: bold">Number of tickets</span> </div>
                                 <div class="input-field col-md-2">
                                    <input style="margin-bottom: 10px; height: 40px;" type="text" name="number_of_tickets">
                                 </div>
-                                <div class="col-md-2"> <input id="register-button" type="submit" value="Register" class="waves-effect waves-light event-regi"> </div>
+                                <div class="col-md-2"> <input id="register-button" type="submit"  value="Register" class="waves-effect waves-light event-regi"> </div>
 
                             </div>
                             <!--END EVENT-->

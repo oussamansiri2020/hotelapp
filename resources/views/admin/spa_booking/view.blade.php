@@ -10,76 +10,61 @@
                     <div class="card">
                         <div class="content">
                             <div class="toolbar">
-                                <a href="{{url('admin/room_type/create')}}" rel="tooltip" title="Add New Room Type"
-                                   class="btn btn-danger" style="margin-right: 20px">
-                                    <i class="ti-plus"></i>
-                                </a>
                                 <!--Here you can write extra buttons/actions for the toolbar-->
                             </div>
                             <table id="bootstrap-table" class="table">
                                 <thead>
                                 <th data-field="sn" class="text-center">S.N.</th>
-                                <th data-field="name" class="text-center">Name</th>
-                                <th data-field="cost_per_day">Cost Per Day</th>
-                                <th data-field="discount_percentage">Discount</th>
-                                <th data-field="max_adult">Max Adult</th>
-                                <th data-field="max_child">Max Child</th>
-                                <th data-field="status" data-sortable="true">Status</th>
+                                <th data-field="spa" class="text-center">spa</th>
+                                <th data-field="spa_date" class="text-center">spa Date</th>
+                    
+                                <th data-field="booked_by" class="text-center">Booked By</th>
+                                <th data-field="statut" class="text-center">statut</th>
+                                <th data-field="payment" data-sortable="true">Payment</th>
                                 <th data-field="actions" class="td-actions text-right">Actions
                                 </th>
                                 </thead>
                                 <tbody>
-                                @unless($room_types->count())
+                                @unless($spa_bookings->count())
                                     @else
-                                        @foreach($room_types as $index => $room_type)
+                                        @foreach($spa_bookings as $index => $spa_booking)
                                             <tr>
                                                 <td>{{$index+1}}</td>
-                                                <td>{{ $room_type->name }}</td>
-                                               <td><span class="badge">{{ config('app.currency').$room_type->cost_per_day }}</span></td>
-                                               <td><span class="badge">{{ $room_type->discount_percentage."%" }}</span></td>
-                                               <td><span class="btn btn-default btn-xs">{{ $room_type->max_adult }}</span></td>
-                                               <td><span class="btn btn-default btn-xs">{{ $room_type->max_child }}</span></td>
+                                                <td>{{ $spa_booking->spa->name }}</td>
+                                                <td>{{ $spa_booking->arrival_date }}</td>
+                                                <td>{{ $spa_booking->user->first_name." ".$spa_booking->user->last_name }}<br>
+                                                    <strong>Email: </strong>{{ $spa_booking->user->email }}
+                                                </td>
                                                 <td>
-                                                    @if($room_type->status == 1)
+                                                    @if($spa_booking->status == "1")
                                                         <button class="btn btn-success btn-xs btn-fill">Active</button>
                                                     @else
-                                                        <button class="btn btn-default btn-xs btn-fill">Inactive
+                                                        <button class="btn btn-danger btn-xs btn-fill">Canceled
+                                                        </button>
+                                                    @endif
+                                                </td>
+                                                <td>
+                                                    @if($spa_booking->payment == 1)
+                                                        <button class="btn btn-success btn-xs btn-fill">Paid</button>
+                                                    @else
+                                                        <button class="btn btn-default btn-xs btn-fill">Not Paid
                                                         </button>
                                                     @endif
                                                 </td>
                                                 <td>
                                                     <div class="table-icons">
-                                                        <a rel="tooltip" title="Manage Images"
-                                                           class="btn btn-simple btn-primary btn-icon table-action edit"
-                                                           href="{{url('admin/room_type/'.$room_type->id.'/image')}}">
-                                                            <i class="ti-image"></i>
-                                                        </a>
-                                                        <a rel="tooltip" title="Manage Rooms"
-                                                           class="btn btn-simple btn-info btn-icon table-action edit"
-                                                           href="{{url('admin/room_type/'.$room_type->id.'/room')}}">
-                                                            <i class="ti-package"></i>
-                                                        </a>
+
                                                         <a rel="tooltip" title="Edit"
                                                            class="btn btn-simple btn-warning btn-icon table-action edit"
-                                                           href="{{url('admin/room_type/'.$room_type->id.'/edit')}}">
+                                                           href="{{url('admin/spa_booking/'.$spa_booking->id.'/edit')}}">
                                                             <i class="ti-pencil-alt"></i>
                                                         </a>
-                                                        {{-- <button rel="tooltip" title="Remove"
-                                                                class="btn btn-simple btn-danger btn-icon table-action"
-                                                                onclick="delete_button($room_type->id)">
-                                                            <i class="ti-close"></i>
-                                                        </button> --}}
-                                                        <form action="{{ route('room_type.destroy', $room_type->id)}}" method="post">
-                                                            @csrf
-                                                            @method('DELETE')
-                                                            <button rel="tooltip" title="Remove" class="btn btn-simple btn-danger btn-icon table-action" type="submit" onclick="return confirm('êtes-vous sûre de cette décision?')" >  <i class="ti-close"></i></button>
-                                                          </form>
-                                                        {{-- <div class="collapse">
-                                                            {!! Form::open(array('id' => 'delete-room_type', 'url' => 'admin/room_type/'.$room_type->id)) !!}
+                                                        <div class="collapse">
+                                                            {!! Form::open(array('id' => 'delete-spa-booking', 'url' => 'admin/spa_booking/'.$spa_booking->id)) !!}
                                                             {{ Form::hidden('_method', 'DELETE') }}
                                                             <button type="submit" class="btn btn-danger btn-ok">Delete</button>
                                                             {!! Form::close() !!}
-                                                        </div> --}}
+                                                        </div>
 
                                                     </div>
                                                 </td>
@@ -107,7 +92,7 @@
 
         var delete_button = function(){
             swal({  title: "Are you sure?",
-                text: "You want to delete the room_type. Deleting room_type will also delete its rooms and its room bookings.",
+                text: "After you delete the spa booking.",
                 type: "warning",
                 showCancelButton: true,
                 confirmButtonClass: "btn btn-info btn-fill",
@@ -115,9 +100,10 @@
                 cancelButtonClass: "btn btn-danger btn-fill",
                 closeOnConfirm: false,
             },function(){
-                $('form#delete-room_type').submit();
+                $('form#delete-spa-booking').submit();
             });
         }
+
 
 
         var $table = $('#bootstrap-table');

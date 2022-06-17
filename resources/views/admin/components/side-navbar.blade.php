@@ -72,6 +72,7 @@
                                     <ul class="nav">
                                         <li @if (Request::is('admin/'.strtolower($item['name']).'/room_booking')) class="active" @endif><a href="{{ url($item['actions']['room_booking'])}}">Room Bookings</a></li>
                                         <li @if (Request::is('admin/'.strtolower($item['name']).'/event_booking')) class="active" @endif><a href="{{ url($item['actions']['event_booking'])}}">Event Bookings</a></li>
+                                        <li @if (Request::is('admin/'.strtolower($item['name']).'/spa_booking')) class="active" @endif><a href="{{ url($item['actions']['spa_booking'])}}">Spa Bookings</a></li>
                                     </ul>
                                 </div>
                             </li>

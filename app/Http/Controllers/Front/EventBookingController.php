@@ -20,7 +20,7 @@ class EventBookingController extends FrontController
     public function book(Request $request, $event_id)
     {
 
-
+           // dd($event_id);
         //check here if the user is authenticated
         if (!Auth::check()) {
             return Redirect::to("/login");

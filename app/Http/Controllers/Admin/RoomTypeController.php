@@ -164,7 +164,7 @@ class RoomTypeController extends AdminController
 
 
         $room_type = RoomType::find($id);
-        error_log( $room_type );
+        //dd($id)
         // Delete rooms
         foreach ((array) $room_type->room as $room) {
             // Delete room bookings

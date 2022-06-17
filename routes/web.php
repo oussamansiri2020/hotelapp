@@ -24,13 +24,17 @@ Route::get('/contact', 'Front\PageController@contact');
 Route::get('/about', 'Front\PageController@about');
 Route::post('/subscribe', 'Front\SubscriberController@store');
 Route::get('/room_type', 'Front\RoomTypeController@index');
+Route::get('/spa_type', 'Front\SpaController@index');
 Route::get('/room_type/{id}', 'Front\RoomTypeController@show');
+Route::get('/spa_type/{id}', 'Front\SpaController@show');
 Route::get('/food', 'Front\FoodController@index');
 Route::get('/food/{id}', 'Front\FoodController@show');
 Route::get('/event', 'Front\EventController@index');
 Route::get('/event/{id}', 'Front\EventController@show');
 Route::post('/room_type/{id}/book', 'Front\RoomBookingController@book');
 Route::post('/event/{id}/book', 'Front\EventBookingController@book');
+Route::post('/spa_type/{id}/book', 'Front\SpaBookingController@book');
+
 
 
 
@@ -40,6 +44,7 @@ Route::group(['prefix' => 'dashboard'], function () {
     Route::get('/', 'Dashboard\HomeController@index');
     Route::get('/room/booking', 'Dashboard\RoomBookingController@index');
     Route::get('/event/booking', 'Dashboard\EventBookingController@index');
+    Route::get('/spa/booking', 'Dashboard\SpaBookingController@index');
     Route::get('room/booking/{id}/cancel', 'Dashboard\RoomBookingController@cancel');
     Route::get('event/booking/{id}/cancel', 'Dashboard\EventBookingController@cancel');
 
@@ -89,6 +94,8 @@ Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function () {
     Route::get('/review/{id}/reject', 'Admin\ReviewController@reject');
 
     Route::resource('room_type', 'Admin\RoomTypeController');
+    Route::resource('spa_type', 'Admin\SpaController');
+    Route::resource('spa_booking', 'Admin\SpaBookingController');
     // Route for room types
     Route::group(['prefix' => 'room_type', 'middleware' => 'auth'], function(){
         // Rutes for Room Type Images

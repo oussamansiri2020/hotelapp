@@ -10,7 +10,7 @@
                     <div class="card">
                         <div class="content">
                             <div class="toolbar">
-                                <a href="{{url('admin/room_type/create')}}" rel="tooltip" title="Add New Room Type"
+                                <a href="{{url('admin/spa_type/create')}}" rel="tooltip" title="Add New spa Type"
                                    class="btn btn-danger" style="margin-right: 20px">
                                     <i class="ti-plus"></i>
                                 </a>
@@ -20,27 +20,27 @@
                                 <thead>
                                 <th data-field="sn" class="text-center">S.N.</th>
                                 <th data-field="name" class="text-center">Name</th>
-                                <th data-field="cost_per_day">Cost Per Day</th>
+                                <th data-field="cost_per_day">Cost</th>
                                 <th data-field="discount_percentage">Discount</th>
-                                <th data-field="max_adult">Max Adult</th>
-                                <th data-field="max_child">Max Child</th>
+                                {{-- <th data-field="max_adult">Max Adult</th>
+                                <th data-field="max_child">Max Child</th> --}}
                                 <th data-field="status" data-sortable="true">Status</th>
                                 <th data-field="actions" class="td-actions text-right">Actions
                                 </th>
                                 </thead>
                                 <tbody>
-                                @unless($room_types->count())
+                                @unless($spa_types->count())
                                     @else
-                                        @foreach($room_types as $index => $room_type)
+                                        @foreach($spa_types as $index => $spa_type)
                                             <tr>
                                                 <td>{{$index+1}}</td>
-                                                <td>{{ $room_type->name }}</td>
-                                               <td><span class="badge">{{ config('app.currency').$room_type->cost_per_day }}</span></td>
-                                               <td><span class="badge">{{ $room_type->discount_percentage."%" }}</span></td>
-                                               <td><span class="btn btn-default btn-xs">{{ $room_type->max_adult }}</span></td>
-                                               <td><span class="btn btn-default btn-xs">{{ $room_type->max_child }}</span></td>
+                                                <td>{{ $spa_type->name }}</td>
+                                               <td><span class="badge">{{ config('app.currency').$spa_type->cost }}</span></td>
+                                               <td><span class="badge">{{ $spa_type->discount_percentage."%" }}</span></td>
+                                               {{-- <td><span class="btn btn-default btn-xs">{{ $spa_type->max_adult }}</span></td>
+                                               <td><span class="btn btn-default btn-xs">{{ $spa_type->max_child }}</span></td> --}}
                                                 <td>
-                                                    @if($room_type->status == 1)
+                                                    @if($spa_type->status == 1)
                                                         <button class="btn btn-success btn-xs btn-fill">Active</button>
                                                     @else
                                                         <button class="btn btn-default btn-xs btn-fill">Inactive
@@ -48,34 +48,34 @@
                                                     @endif
                                                 </td>
                                                 <td>
-                                                    <div class="table-icons">
+                                                    {{-- <div class="table-icons">
                                                         <a rel="tooltip" title="Manage Images"
                                                            class="btn btn-simple btn-primary btn-icon table-action edit"
-                                                           href="{{url('admin/room_type/'.$room_type->id.'/image')}}">
+                                                           href="{{url('admin/spa_type/'.$spa_type->id.'/image')}}">
                                                             <i class="ti-image"></i>
                                                         </a>
-                                                        <a rel="tooltip" title="Manage Rooms"
+                                                        <a rel="tooltip" title="Manage spas"
                                                            class="btn btn-simple btn-info btn-icon table-action edit"
-                                                           href="{{url('admin/room_type/'.$room_type->id.'/room')}}">
+                                                           href="{{url('admin/spa_type/'.$spa_type->id.'/spa')}}">
                                                             <i class="ti-package"></i>
-                                                        </a>
+                                                        </a> --}}
                                                         <a rel="tooltip" title="Edit"
                                                            class="btn btn-simple btn-warning btn-icon table-action edit"
-                                                           href="{{url('admin/room_type/'.$room_type->id.'/edit')}}">
+                                                           href="{{url('admin/spa_type/'.$spa_type->id.'/edit')}}">
                                                             <i class="ti-pencil-alt"></i>
                                                         </a>
                                                         {{-- <button rel="tooltip" title="Remove"
                                                                 class="btn btn-simple btn-danger btn-icon table-action"
-                                                                onclick="delete_button($room_type->id)">
+                                                                onclick="delete_button($spa_type->id)">
                                                             <i class="ti-close"></i>
                                                         </button> --}}
-                                                        <form action="{{ route('room_type.destroy', $room_type->id)}}" method="post">
+                                                        <form style='display:inline' action="{{ route('spa_type.destroy', $spa_type->id)}}" method="post">
                                                             @csrf
                                                             @method('DELETE')
                                                             <button rel="tooltip" title="Remove" class="btn btn-simple btn-danger btn-icon table-action" type="submit" onclick="return confirm('êtes-vous sûre de cette décision?')" >  <i class="ti-close"></i></button>
                                                           </form>
                                                         {{-- <div class="collapse">
-                                                            {!! Form::open(array('id' => 'delete-room_type', 'url' => 'admin/room_type/'.$room_type->id)) !!}
+                                                            {!! Form::open(array('id' => 'delete-spa_type', 'url' => 'admin/spa_type/'.$spa_type->id)) !!}
                                                             {{ Form::hidden('_method', 'DELETE') }}
                                                             <button type="submit" class="btn btn-danger btn-ok">Delete</button>
                                                             {!! Form::close() !!}
@@ -107,7 +107,7 @@
 
         var delete_button = function(){
             swal({  title: "Are you sure?",
-                text: "You want to delete the room_type. Deleting room_type will also delete its rooms and its room bookings.",
+                text: "You want to delete the spa_type. Deleting spa_type will also delete its spas and its spa bookings.",
                 type: "warning",
                 showCancelButton: true,
                 confirmButtonClass: "btn btn-info btn-fill",
@@ -115,7 +115,7 @@
                 cancelButtonClass: "btn btn-danger btn-fill",
                 closeOnConfirm: false,
             },function(){
-                $('form#delete-room_type').submit();
+                $('form#delete-spa_type').submit();
             });
         }
 

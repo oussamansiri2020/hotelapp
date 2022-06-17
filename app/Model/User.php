@@ -37,4 +37,8 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\Model\EventBooking');
     }
+    public function spa_bookings()
+    {
+        return $this->hasMany('App\Model\SpaBooking');
+    }
 }
